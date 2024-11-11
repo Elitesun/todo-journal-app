@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'jstyles.css' %}">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap">
+    <title>Journal</title>
+</head>
+<body>
+    {% block header %}
+<header>
+    <div class="header-content">
+        <h1 class="font-title">Journal Entries</h1>
+        <p class="header-subtitle">Make it simple, one thing at a time</p>
+    </div>
+    <nav class="navbar">
+        <ul>
+            <li><a href="{% url 'todo:tasks' %}">Task</a></li>
+            <li><a href="{% url 'todo:journal' %}">Journal</a></li>
+        </ul>
+    </nav>
+</header>
+{% endblock header %}
+    {% block journal %}
+    {% endblock journal %}
+</body>
+</html>

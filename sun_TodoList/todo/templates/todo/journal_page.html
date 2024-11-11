@@ -1,0 +1,42 @@
+{% extends 'todo/journal_base.html' %}
+{% load static %}
+{% block journal %}
+<div class="header-bar">
+    <div>
+        <h1 style="color: white; font-family: 'Playwrite GB S', serif;">Hello {{request.user|title}}</h1>
+    </div>
+
+    {% if request.user.is_authenticated %}
+    <form action="{% url 'todo:logout' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Logout" class="lgb">
+    </form>
+    {% else %}
+    <a href="{% url 'todo:login' %}">Login</a> {% endif %}
+   
+</div>
+
+{% if journals|length > 0 %}
+<a id="add-link" href="{% url 'todo:journal_create' %}">+ Add</a>
+{% endif %}
+<br><br><br>
+</div>
+    <div class="list">
+
+        {% for journal in journals %}
+        <div class="list-wrapper" data-position="{{journal.pk}}">
+            <div class="list-title">
+                <a href="{% url 'todo:journal_update' journal.id %}">{{journal}} 📌 {{journal.content|truncatechars:50}}</a>
+            </div>
+
+            <a class="delete-link" href="{% url 'todo:journal_delete' journal.id %}">🗑</a>
+        </div>
+    
+        {% empty %}
+        <div style="text-align: center; padding-bottom: 10px; line-height: 1em;">
+            <h3>No Journal Entries found</h3>
+            <h3>Create a <a style="text-decoration: none; color: #e53935;" href="{% url 'todo:journal_create' %}">New Journal</a> ! </h3>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock journal %}

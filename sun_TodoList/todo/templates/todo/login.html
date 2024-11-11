@@ -1,0 +1,18 @@
+{% extends 'todo/base.html' %}
+{% load static%}
+{% block content %}
+
+<h1>Login</h1>
+<div class="card">
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Login" id="add-link">
+        
+        <p> D'ont have an Account yet: <a href="{% url 'todo:register' %}" class="button">Register</a></p>
+        
+    </form>
+</div>
+
+{% endblock content %}

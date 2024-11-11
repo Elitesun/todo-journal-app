@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap">
+    <title>Todo List</title>
+
+</head>
+<body>
+    {% block header %} {% endblock header %}
+    <div class="container">
+        {% block content %} {% endblock content %}
+    </div>
+   
+</body>
+</html>

@@ -1,0 +1,67 @@
+{% extends 'todo/base.html' %}
+{% load static %}
+{% block header %}
+<header>
+    <div class="header-content">
+        <h1 class="font-title">Todo List</h1>
+        <p class="header-subtitle">Make it simple, one thing at a time</p>
+    </div>
+    <nav class="navbar">
+        <ul>
+            <li><a href="{% url 'todo:tasks' %}">Task</a></li>
+            <li><a href="{% url 'todo:journal'%}">Journal</a></li>
+        </ul>
+    </nav>
+</header>
+{% endblock header %}
+{% block content %}
+
+<div class="header-bar">
+    <div>
+        <h1>Hello {{request.user|title}}</h1>
+        <h3 style="margin:0">You have <i>{{count}}</i> incomplete task{{ count|pluralize:"s" }}</h3>
+    </div>
+
+    {% if request.user.is_authenticated %}
+    <form action="{% url 'todo:logout' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Logout" class="lgb">
+    </form>
+    {% else %}
+    <a href="{% url 'todo:login' %}">Login</a> {% endif %}
+</div>
+
+<div id="search-add-wrapper">
+    <form method="GET" style="display: flex;">
+        <input type='text' name='search-area' placeholder="Search task" value="{{search_input}}" class="search-input">
+        <input class="search-button" type="submit" value='Search'>
+    </form>
+    {% if tasks|length > 0 %}
+    <a id="add-link" href="{% url 'todo:task_create' %}">+ Add</a>
+    {% endif %}
+</div>
+    <div class="list">
+
+        {% for task in tasks %}
+        <div class="task-wrapper" data-position="{{task.pk}}">
+            <div class="task-title">
+                {% if task.complete %}
+                <div class="task-complete-icon"></div>
+                <i><s><a href="{% url 'todo:Edit' task.id %}">{{task}}</a></s></i> {% else %}
+                <div class="task-incomplete-icon"></div>
+                <a href="{% url 'todo:Edit' task.id %}">{{task}}</a> {% endif %}
+            </div>
+            <div class="task-controls">
+                <a class="delete-link" href="{% url 'todo:Delete' task.id %}">🗑</a>
+               
+            </div>
+        </div>
+    
+        {% empty %}
+        <div style="text-align: center; padding-bottom: 10px; line-height: 1em;">
+            <h3>No new tasks are created.</h3>
+            <h3>Create a <a style="text-decoration: none; color: #e53935;" href="{% url 'todo:task_create' %}">New task</a> ! </h3>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
