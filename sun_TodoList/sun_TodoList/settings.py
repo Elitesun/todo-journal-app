@@ -105,8 +105,14 @@ LOGOUT_REDIRECT_URL = 'todo:login'
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
 
+# This is where collectstatic will gather all static files
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Additional directories to look for static files
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'todo/templates/todo/static'),
+]
+
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'todo/templates/todo/static')]
 
